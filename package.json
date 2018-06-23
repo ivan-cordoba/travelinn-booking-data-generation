@@ -1,0 +1,17 @@
+{
+  "name": "bookingdatagenerator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "load_couch": "cat data.json | couchimport --url http://localhost:5984 --db hostels --parallelism 10 --type jsonl",
+    "load_postgres": "pv ./data/rooms.csv | psql travelinn -c \"COPY rooms FROM STDIN with csv;\" && pv ./data/bookings.csv | psql travelinn -c \"COPY bookings FROM STDIN with csv;\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "couchimport": "^0.7.0",
+  }
+}
